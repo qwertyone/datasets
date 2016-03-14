@@ -38,3 +38,6 @@ one method of examining for normality")}
  print(results)
  }
 }
+
+
+exam.norm(X,univariate=T,univariate.test=F,bivariate=T,multivariate=T)

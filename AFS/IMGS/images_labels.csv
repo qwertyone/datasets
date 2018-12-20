@@ -1,4 +1,4 @@
-file,is_unindentified_algae_from_satellite,has_bioluminescence,other,Key Details,Satellite,Date,Species,Notes
+file,is_unindentified_algae_from_satellite,has_bioluminescence,other,Key Details,Satellite,Date,Suspected Species,Notes
 00001.jpg,TRUE,FALSE,FALSE,,,,,
 00002.jpg,TRUE,FALSE,FALSE,,,,,
 00003.jpg,TRUE,FALSE,FALSE,,,,,
@@ -481,9 +481,9 @@ file,is_unindentified_algae_from_satellite,has_bioluminescence,other,Key Details
 00480.jpg,FALSE,FALSE,TRUE,,,,,
 00481.jpg,FALSE,FALSE,TRUE,,,,,
 00482.jpg,TRUE,FALSE,FALSE,Canary Upwelling System,Suomi-NPP/VIIRS,12/20/2018,,
-00483.jpg,TRUE,FALSE,FALSE,Lake Okeechobee, Sentinel-2B/MSI ,7/5/2018,,
+00483.jpg,TRUE,FALSE,FALSE,Lake Okeechobee,Â Sentinel-2B/MSIÂ ,7/5/2018,,
 00484.jpg,TRUE,FALSE,FALSE,Algal Slick,landsat 8,6/24/2006,,
-00485.jpg,TRUE,FALSE,FALSE,Gulf of Oman Bloom,landsat 8,12/22/2017,Noctiluca scintillans ,
+00485.jpg,TRUE,FALSE,FALSE,Gulf of Oman Bloom,landsat 8,12/22/2017,Noctiluca scintillansÂ ,
 00486.png,TRUE,FALSE,FALSE,yukon river delta bloom,landsat 8,7/21/2017,,
 00487.jpg,TRUE,FALSE,FALSE,Western south atlantic bloom,Aqua/Modis,11/23/2018,,
 00488.jpg,TRUE,FALSE,FALSE,Arabian Sea,Aqua/Modis,11/23/2018,,

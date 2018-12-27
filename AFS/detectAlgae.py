@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# coding: utf-8
+
 
 #####################################
 # Libraries
@@ -46,15 +46,16 @@ np.random.seed(42)
 tensorflow.set_random_seed(42)
 
 # Global variables
-img_folder='C:/Users/anoth/AnacondaProjects/input/images/'
+img_folder='./IMGS/'
 img_width=100
 img_height=100
 img_channels=3
 
 # # 2. Read algae data
-algaes=pd.read_csv('C:/Users/anoth/AnacondaProjects/input/images_data.csv', 
+algaes=pd.read_csv('./IMGS/images_data.csv', 
                 index_col=False,  
-                dtype={'algae_from_space':'category', 'bioluminescence':'category','other':'category'})
+                dtype={'is_unindentified_algae_from_satellite':'category','other':'category'},
+                encoding = "ISO-8859-1")
 
 # Will use this function later to load images of preprocessed algaes
 # Don't load images just from the start to save memory for preprocessing steps
@@ -68,12 +69,12 @@ def read_img(file):
     img = skimage.transform.resize(img, (img_width, img_height), mode='reflect')
     return img[:,:,:img_channels]
 
-# # 4. algae algae_from_space classification
+# # 4. algae is_unindentified_algae_from_satellite classification
 # Preprocessing includes data balancing and augmentation.
 # Then we'll be ready to train CNN.
 # 
-# ## 4.1. Data preprocessing for algae algae_from_space
-# ### 4.1.1 Balancing samples by algae_from_space
+# ## 4.1. Data preprocessing for algae is_unindentified_algae_from_satellite	
+# ### 4.1.1 Balancing samples by is_unindentified_algae_from_satellite	
 # Split all algaes to train, validation and test. Then balance train dataset.
 # Splitting should be done before balancing to avoid putting the same upsampled images to both sets.
 
@@ -95,14 +96,14 @@ def split_balance(algaes, field_name):
     # Validation for use during learning
     train_algaes, val_algaes = train_test_split(train_algaes, test_size=0.1, random_state=24)
 
-    #Balance by algae_from_space to train_algaes_bal_ss dataset
+    #Balance by is_unindentified_algae_from_satellite to train_algaes_bal_ss dataset
     # Number of samples in each category
     ncat_bal = int(len(train_algaes)/train_algaes[field_name].cat.categories.size)
     train_algaes_bal = train_algaes.groupby(field_name, as_index=False).apply(lambda g:  g.sample(ncat_bal, replace=True)).reset_index(drop=True)
     return(train_algaes_bal, val_algaes, test_algaes)
     
 # Split/balance sets
-train_algaes_bal, val_algaes, test_algaes = split_balance(algaes, 'algae_from_space')
+train_algaes_bal, val_algaes, test_algaes = split_balance(algaes, 'is_unindentified_algae_from_satellite')
 
 # Will use balanced dataset as main
 train_algaes = train_algaes_bal
@@ -110,7 +111,7 @@ train_algaes = train_algaes_bal
 # ### 4.1.2 Prepare features
 ## load them and use ImageDataGenerator to randomly shift/rotate/zoom. 
 
-# The same way of loading images and one hot encoding will be used in 2 places: algae_from_space and health CNN.
+# The same way of loading images and one hot encoding will be used in 2 places: is_unindentified_algae_from_satellite CNN.
 # Let's put this logic in function here to reuse.
 def prepare2train(train_algaes, val_algaes, test_algaes, field_name):
     """
@@ -120,7 +121,7 @@ def prepare2train(train_algaes, val_algaes, test_algaes, field_name):
     """
     # algaes already splitted to train, validation and test
     # Load and transform images to have equal width/height/channels. 
-    # read_img function is defined in the beginning to use in both health and algae_from_space. 
+    # read_img function is defined in the beginning to use is_unindentified_algae_from_satellite	. 
     # Use np.stack to get NumPy array for CNN input
 
     # Train data
@@ -155,9 +156,9 @@ def prepare2train(train_algaes, val_algaes, test_algaes, field_name):
     return (generator, train_X, val_X, test_X, train_y, val_y, test_y)
 
 # Call image preparation and one hot encoding
-generator, train_X, val_X, test_X, train_y, val_y, test_y = prepare2train(train_algaes, val_algaes, test_algaes, 'algae_from_space')
+generator, train_X, val_X, test_X, train_y, val_y, test_y = prepare2train(train_algaes, val_algaes, test_algaes, 'is_unindentified_algae_from_satellite')
 
-# ## 4.2 Train algae algae_from_space CNN
+# ## 4.2 Train algae is_unindentified_algae_from_satellite CNN
 
 
 from keras.layers import Conv2D, MaxPooling2D
@@ -213,8 +214,8 @@ score = loaded_model.evaluate(X, Y, verbose=0)
 print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
 
 
-# ## 4.3 Evaluate algae algae_from_space detection model
-# This is a function to use in algae algae_from_space evaluation
+# ## 4.3 Evaluate algae is_unindentified_algae_from_satellite detection model
+# This is a function to use in algae is_unindentified_algae_from_satellite evaluation
 def eval_model(training, model, test_X, test_y, field_name):
     """
     Model evaluation: plots, classification report
@@ -243,11 +244,11 @@ def eval_model(training, model, test_X, test_y, field_name):
     plt.tight_layout()
     plt.show()
 
-    # Accuracy by algae_from_space
+    # Accuracy by is_unindentified_algae_from_satellite	
     test_pred = model.predict(test_X)
     
-    acc_by_algae_from_space = np.logical_and((test_pred > 0.5), test_y).sum()/test_y.sum()
-    acc_by_algae_from_space.plot(kind='bar', title='Accuracy by %s' % field_name)
+    acc_by_is_unindentified_algae_from_satellite= np.logical_and((test_pred > 0.5), test_y).sum()/test_y.sum()
+    acc_by_is_unindentified_algae_from_satellite.plot(kind='bar', title='Accuracy by %s' % field_name)
     plt.ylabel('Accuracy')
     plt.show()
 
@@ -262,4 +263,4 @@ def eval_model(training, model, test_X, test_y, field_name):
     print('Loss function: %s, accuracy:' % test_res[0], test_res[1])
 
 # Call evaluation function
-eval_model(training1, model1, test_X, test_y, 'algae_from_space')
+eval_model(training1, model1, test_X, test_y, 'is_unindentified_algae_from_satellite')

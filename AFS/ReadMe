@@ -1,1 +1,2 @@
 This dataset feeds into a convolutional neural network that attempts to identify satallite images from Ocean Color that have a high probability of capturing algae blooms. Without confirmatory sea sampling collected at the time and location of the satallite images, the network can only suggest the presence of an algae bloom.
+Images in this database are sourced from public google searches, NASA Visible Earth, and NASA Ocean Color and are based from both false and true color remote imagery. Other images are included to expand future development to identify bioluminscence.

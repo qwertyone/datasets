@@ -90,11 +90,11 @@ def split_balance(algaes, field_name):
     @return:  balanced train algaes, validation algaes, test algaes
     """
     # Split to train and test before balancing
-    train_algaes, test_algaes = train_test_split(algaes, random_state=24)
+    train_algaes, test_algaes = train_test_split(algaes, random_state=50)
 
     # Split train to train and validation datasets
     # Validation for use during learning
-    train_algaes, val_algaes = train_test_split(train_algaes, test_size=0.1, random_state=24)
+    train_algaes, val_algaes = train_test_split(train_algaes, test_size=0.1, random_state=50)
 
     #Balance by is_unindentified_algae_from_satellite to train_algaes_bal_ss dataset
     # Number of samples in each category
@@ -176,13 +176,16 @@ model1=Sequential([
     Conv2D(6, kernel_size=3, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
     MaxPool2D(2),
     Conv2D(12, kernel_size=3, activation='relu', padding='same'),
+    Dropout(.23, noise_shape=None, seed=43),
+    MaxPool2D(2),
+    Conv2D(24, kernel_size=3, activation='relu', padding='same'),
     Flatten(),
     Dense(train_y.columns.size, activation='softmax')])
 
 model1.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 # Train
-training1 = model1.fit_generator(generator.flow(train_X,train_y, batch_size=60)
+training1 = model1.fit_generator(generator.flow(train_X,train_y, batch_size=150)
                         ,epochs=20
                         ,validation_data=[val_X, val_y]
                         ,steps_per_epoch=50
@@ -210,9 +213,9 @@ print("Loaded model from disk")
 
 # evaluate loaded model on test data
 loaded_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-score = loaded_model.evaluate(X, Y, verbose=0)
-print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
-
+#score = loaded_model.evaluate(X, Y, verbose=0)
+#print("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
+#
 
 # ## 4.3 Evaluate algae is_unindentified_algae_from_satellite detection model
 # This is a function to use in algae is_unindentified_algae_from_satellite evaluation

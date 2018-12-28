@@ -147,12 +147,12 @@ def prepare2train(train_algaes, val_algaes, test_algaes, field_name):
             samplewise_std_normalization=False,  # divide each input by its std
             zca_whitening=False,  # apply ZCA whitening
             rotation_range=180,  # randomly rotate images in the range (degrees, 0 to 180)
-            zoom_range = 0.1, # Randomly zoom image 
-            width_shift_range=0.2,  # randomly shift images horizontally (fraction of total width)
-            height_shift_range=0.2,  # randomly shift images vertically (fraction of total height)
+            zoom_range = 0.15, # Randomly zoom image 
+            width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+            height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
             horizontal_flip=True,  # randomly flip images
             vertical_flip=True)
-    generator.fit(train_X)
+    generator.fit(train_X,augment=True, rounds=50, seed=43)
     return (generator, train_X, val_X, test_X, train_y, val_y, test_y)
 
 # Call image preparation and one hot encoding
@@ -163,9 +163,9 @@ generator, train_X, val_X, test_X, train_y, val_y, test_y = prepare2train(train_
 
 from keras.layers import Conv2D, MaxPooling2D
 # We'll stop training if no improvement after some epochs
-earlystopper1 = EarlyStopping(monitor='loss', patience=10, verbose=1)
+earlystopper1 = EarlyStopping(monitor='loss', patience=3, verbose=1)
 
-# Save the best model during the traning
+# Save the best model during the training
 checkpointer1 = ModelCheckpoint('best_model1.h5'
                                 ,monitor='val_acc'
                                 ,verbose=1
@@ -173,12 +173,18 @@ checkpointer1 = ModelCheckpoint('best_model1.h5'
                                 ,save_weights_only=True)
 # Build CNN model
 model1=Sequential([
-    Conv2D(6, kernel_size=3, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
+    Conv2D(96, kernel_size=3, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
+    Conv2D(48, kernel_size=3, activation='relu', padding='same'),
     MaxPool2D(2),
-    Conv2D(12, kernel_size=3, activation='relu', padding='same'),
-    Dropout(.23, noise_shape=None, seed=43),
-    MaxPool2D(2),
+    Dropout(.2, noise_shape=None, seed=43),
     Conv2D(24, kernel_size=3, activation='relu', padding='same'),
+    Conv2D(12, kernel_size=3, activation='relu', padding='same'),
+    MaxPool2D(2),
+    Dropout(.2, noise_shape=None, seed=43),
+    Conv2D(6, kernel_size=3, activation='relu', padding='same'),
+    Conv2D(3, kernel_size=3, activation='relu', padding='same'),
+    MaxPool2D(2),
+    Dropout(.2, noise_shape=None, seed=43),
     Flatten(),
     Dense(train_y.columns.size, activation='softmax')])
 
@@ -186,9 +192,9 @@ model1.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accu
 
 # Train
 training1 = model1.fit_generator(generator.flow(train_X,train_y, batch_size=150)
-                        ,epochs=20
+                        ,epochs=5
                         ,validation_data=[val_X, val_y]
-                        ,steps_per_epoch=50
+                        ,steps_per_epoch=75
                         ,callbacks=[earlystopper1, checkpointer1])
 # Get the best saved weights
 model1.load_weights('best_model1.h5')

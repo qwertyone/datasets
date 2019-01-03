@@ -226,7 +226,8 @@ file,is_unindentified_algae_from_satellite,has_bioluminescence,other,Key Details
 00224.jpg,TRUE,FALSE,FALSE,larger version of 00223.jpg,landsat 8,7/28/2015,,,,
 00225.jpg,TRUE,FALSE,FALSE,lake erie,landsat 8,9/26/2017,,,,
 00226.jpg,TRUE,FALSE,FALSE,florida,unidentified from daily beast,,,,,
-00227.jpg,TRUE,FALSE,FALSE,florida key,Aqua/Modis,12/2/2003,,,,
+00227.jpg,TRUE,FALSE,FALSE,florida key,Aqua/Modis,12/2/2003,,,https://visibleearth.nasa.gov/view.php?id=69467,500m
+00526.jpg,TRUE,FALSE,FALSE,florida key,Aqua/Modis,12/2/2003,,,https://visibleearth.nasa.gov/view.php?id=69467,250m
 00228.jpg,TRUE,FALSE,FALSE,salton sea,Aqua/Modis,5/28/2003,,,https://visibleearth.nasa.gov/view.php?id=67704,500m
 00496.jpg,TRUE,FALSE,FALSE,salton sea,Aqua/Modis,5/28/2003,,,https://visibleearth.nasa.gov/view.php?id=67704,250m
 00229.jpg,TRUE,FALSE,FALSE,earlier image of 00228.jpg of the salton sea,Aqua/Modis,5/28/2003,,,https://visibleearth.nasa.gov/view.php?id=67676,500m
@@ -524,3 +525,9 @@ file,is_unindentified_algae_from_satellite,has_bioluminescence,other,Key Details
 00491.png,TRUE,FALSE,FALSE,Falkland Island Bloom,Suomi-NPP/VIIRS,,,,,
 00492.jpg,TRUE,FALSE,FALSE,Arabian Sea,Aqua/Modis,10/22/2018,,,,
 00493.jpg,TRUE,FALSE,FALSE,Patagonia Blooms,Suomi-NPP/VIIRS,10/19/2018,,,,
+00527.jpg,TRUE,FALSE,FALSE,Lake Erie,Terra/Modis,8/3/2014,Microcystis spp.,Deadly algae was confirmed on the ground by NOAA Great Lakes Env. Research Lab,https://visibleearth.nasa.gov/view.php?id=84125,
+00528.jpg,TRUE,FALSE,FALSE,Lake Erie,Terra/Modis,8/3/2014,Microcystis spp.,Deadly algae was confirmed on the ground by NOAA Great Lakes Env. Research Lab,https://visibleearth.nasa.gov/view.php?id=84125,
+00529.jpg,TRUE,FALSE,FALSE,Lake Erie,landsat 8,8/1/2014,Microcystis spp.,Deadly algae was confirmed on the ground by NOAA Great Lakes Env. Research Lab,https://visibleearth.nasa.gov/view.php?id=84125,
+00530.jpg,TRUE,FALSE,FALSE,Lake Erie,landsat 8,8/1/2014,Microcystis spp.,Deadly algae was confirmed on the ground by NOAA Great Lakes Env. Research Lab,https://visibleearth.nasa.gov/view.php?id=84125,
+00531.jpg,TRUE,FALSE,FALSE,Lake Erie,Terra/Modis,8/4/2014,Microcystis spp.,Deadly algae was confirmed on the ground by NOAA Great Lakes Env. Research Lab,https://visibleearth.nasa.gov/view.php?id=84125,
+00532.jpg,TRUE,FALSE,FALSE,Ross Ice Self,Aqua/Modis,2/23/2008,,This image is for another version of this model.,https://visibleearth.nasa.gov/view.php?id=8517,

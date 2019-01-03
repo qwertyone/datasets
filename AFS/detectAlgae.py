@@ -181,10 +181,6 @@ model1=Sequential([
     Conv2D(12, kernel_size=3, activation='relu', padding='same'),
     MaxPool2D(2),
     Dropout(.2, noise_shape=None, seed=43),
-    Conv2D(64, kernel_size=2, activation='relu', padding='same'),
-    Conv2D(32, kernel_size=2, activation='relu', padding='same'),
-    MaxPool2D(2),
-    Dropout(.2, noise_shape=None, seed=43),
     Flatten(),
     Dense(train_y.columns.size, activation='softmax')])
 

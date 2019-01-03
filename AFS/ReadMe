@@ -1,5 +1,7 @@
 This dataset feeds into a convolutional neural network that attempts to identify satellite images from Ocean Color that have a high probability of capturing algae blooms. Without confirmatory sea sampling collected at the time and location of the satellite images, the network can only suggest the presence of an algae bloom.
 Images in this database are sourced from public google searches, NASA Visible Earth, and NASA Ocean Color and are based from both false and true color remote imagery. Other images are included to expand future development to identify bioluminescence.
+For future development, Chlorophyll readings from Ocean Color might better suit the goals of this model.
+
 
 GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007

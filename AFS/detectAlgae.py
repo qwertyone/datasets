@@ -173,16 +173,16 @@ checkpointer1 = ModelCheckpoint('best_model1.h5'
                                 ,save_weights_only=True)
 # Build CNN model
 model1=Sequential([
-    Conv2D(96, kernel_size=3, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
-    Conv2D(48, kernel_size=3, activation='relu', padding='same'),
+    Conv2D(96, kernel_size=5, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
+    Conv2D(48, kernel_size=5, activation='relu', padding='same'),
     MaxPool2D(2),
     Dropout(.2, noise_shape=None, seed=43),
     Conv2D(24, kernel_size=3, activation='relu', padding='same'),
     Conv2D(12, kernel_size=3, activation='relu', padding='same'),
     MaxPool2D(2),
     Dropout(.2, noise_shape=None, seed=43),
-    Conv2D(6, kernel_size=3, activation='relu', padding='same'),
-    Conv2D(3, kernel_size=3, activation='relu', padding='same'),
+    Conv2D(64, kernel_size=2, activation='relu', padding='same'),
+    Conv2D(32, kernel_size=2, activation='relu', padding='same'),
     MaxPool2D(2),
     Dropout(.2, noise_shape=None, seed=43),
     Flatten(),
@@ -194,7 +194,7 @@ model1.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accu
 training1 = model1.fit_generator(generator.flow(train_X,train_y, batch_size=150)
                         ,epochs=5
                         ,validation_data=[val_X, val_y]
-                        ,steps_per_epoch=75
+                        ,steps_per_epoch=100
                         ,callbacks=[earlystopper1, checkpointer1])
 # Get the best saved weights
 model1.load_weights('best_model1.h5')

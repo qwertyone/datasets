@@ -173,8 +173,8 @@ checkpointer1 = ModelCheckpoint('best_model1.h5'
                                 ,save_weights_only=True)
 # Build CNN model
 model1=Sequential([
-    Conv2D(96, kernel_size=5, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
-    Conv2D(48, kernel_size=5, activation='relu', padding='same'),
+    Conv2D(64, kernel_size=3, input_shape=(img_width, img_height,3), activation='relu', padding='same'),
+    Conv2D(48, kernel_size=3, activation='relu', padding='same'),
     MaxPool2D(2),
     Dropout(.2, noise_shape=None, seed=43),
     Conv2D(24, kernel_size=3, activation='relu', padding='same'),
